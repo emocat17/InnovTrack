@@ -22,27 +22,6 @@
 - username: admin
 - password: 123456
 
-### 登录页
-
-![image](https://github.com/mizhexiaoxiao/vue-fastapi-admin/blob/main/deploy/sample-picture/login.jpg)
-### 工作台
-
-![image](https://github.com/mizhexiaoxiao/vue-fastapi-admin/blob/main/deploy/sample-picture/workbench.jpg)
-
-### 用户管理
-
-![image](https://github.com/mizhexiaoxiao/vue-fastapi-admin/blob/main/deploy/sample-picture/user.jpg)
-### 角色管理
-
-![image](https://github.com/mizhexiaoxiao/vue-fastapi-admin/blob/main/deploy/sample-picture/role.jpg)
-
-### 菜单管理
-
-![image](https://github.com/mizhexiaoxiao/vue-fastapi-admin/blob/main/deploy/sample-picture/menu.jpg)
-
-### API管理
-
-![image](https://github.com/mizhexiaoxiao/vue-fastapi-admin/blob/main/deploy/sample-picture/api.jpg)
 
 ### 快速开始
 #### 方法一：dockerhub拉取镜像
