@@ -59,22 +59,17 @@
   pnpm dev
   ```
 
-- **注意!!!!!!!!!!!!!!!!!!!!**：在`pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple` 需要先注释掉`requirements.txt`中的`uvloop`，这个库不支持Windows，主要用于优化协程的事件循环，不安装也不影响运行
-- 模板的创建API功能和创建菜单是能创建，但是因为没有路由和控制器，是没有用的;只当是个样式模板。
+- **注意!**：在`pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple` 需要先注释掉`requirements.txt`中的`uvloop`，这个库不支持Windows，主要用于优化协程的事件循环，不安装也不影响运行
+- 模板的创建API功能和创建菜单是能创建对应视图，但是因为没有路由和控制器，是没有用的;只当是个样式模板。
 
 
 ---
 ---
----
----
----
 
-# 具体操作示例Demo:以这个实际为准
+# 具体操作示例Demo:以这个示例为准
 - **前端**
 
 1. 到`web/src/router/routes/index.js`中增加侧边栏的定义代码片段,举个例子:在export const basicRoutes 下找到合适的位置(我已经给出例子),增加对应的子目录和子菜单栏
-
-
       ```
       {
         name: t('数据收集'), 
@@ -128,7 +123,7 @@
 
 2. 在`web/src/views`中合适位置新增页面,点击对应栏目就可以展示vue界面了
       创建文件夹,里面放一个vue文件
-
+<br/>
 
 3. 在`web/src/api/index.js`中增加api的接口定义
     该文件的其他代码如何定义接口作为参考;

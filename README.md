@@ -14,7 +14,7 @@ password：123456
 - Python 3.11
 
 #### Pip 安装依赖
-1. 创建虚拟环境 Conda也行
+1. 创建虚拟环境     $~~~~$Conda也行
 ```sh
 python3.11 -m venv venv
 ```
