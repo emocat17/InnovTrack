@@ -18,6 +18,8 @@ export default {
       content: null,
     }
   },
+
+  
   methods: {
     async fetchData() {
       try {
