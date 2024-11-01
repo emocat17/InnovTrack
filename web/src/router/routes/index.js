@@ -145,6 +145,55 @@ export const basicRoutes = [
       },
     ],
   },
+  ///////////////////////////////////////////////////////////////////////////////////
+  {
+    name: t('数据库'), 
+    path: '/database',
+    component: Layout,
+    meta: {
+      title: t('数据库'),
+      icon: 'material-symbols-light:data-table-outline',
+      order: 11,
+    },
+    children: [
+      {
+        name: '论文库',
+        path: 'papers',
+        component: () => import('@/views/data-collection/papers/index.vue'),  //自己创建;
+        meta: {
+          title: '论文库',
+          icon: 'material-symbols:edit-document',
+        },
+      },
+      {
+        name: '专利库',
+        path: 'patents',
+        component: () => import('@/views/data-collection/patents/index.vue'),  //自己创建;
+        meta: {
+          title: '专利库',
+          icon: 'material-symbols:book-4-rounded',
+        },
+      },
+      {
+        name: '文档库',
+        path: 'documents',
+        component: () => import('@/views/data-collection/documents/index.vue'),  //自己创建;
+        meta: {
+          title: '文档库',
+          icon: 'material-symbols:lab-profile',
+        },
+      },
+      {
+        name: '社交媒体库',
+        path: 'social-medias',
+        component: () => import('@/views//data-collection/social-medias/index.vue'), //
+        meta: {
+          title: '社交媒体库',
+          icon: 'mdi:play-network',
+        },
+      },
+    ],
+  },
   //////////////////////END//////////////////////////////
   {
     name: '403',
