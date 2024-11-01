@@ -8,3 +8,4 @@ router = APIRouter()
 async def fetch_document_data():
     data =  await document_controller.fetch_data()
     return Success(data = data)
+    return Success(data = data) 
