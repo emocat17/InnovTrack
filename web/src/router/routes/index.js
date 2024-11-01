@@ -145,7 +145,7 @@ export const basicRoutes = [
       },
     ],
   },
-  ///////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////数据库栏目////////////////////////////////////
   {
     name: t('数据库'), 
     path: '/database',
@@ -159,7 +159,7 @@ export const basicRoutes = [
       {
         name: '论文库',
         path: 'papers',
-        component: () => import('@/views/data-collection/papers/index.vue'),  //自己创建;
+        component: () => import('@/views/database/papers/index.vue'),  //自己创建;
         meta: {
           title: '论文库',
           icon: 'material-symbols:edit-document',
@@ -168,7 +168,7 @@ export const basicRoutes = [
       {
         name: '专利库',
         path: 'patents',
-        component: () => import('@/views/data-collection/patents/index.vue'),  //自己创建;
+        component: () => import('@/views/database/patents/index.vue'),  //自己创建;
         meta: {
           title: '专利库',
           icon: 'material-symbols:book-4-rounded',
@@ -177,7 +177,7 @@ export const basicRoutes = [
       {
         name: '文档库',
         path: 'documents',
-        component: () => import('@/views/data-collection/documents/index.vue'),  //自己创建;
+        component: () => import('@/views/database/documents/index.vue'),  //自己创建;
         meta: {
           title: '文档库',
           icon: 'material-symbols:lab-profile',
@@ -186,7 +186,7 @@ export const basicRoutes = [
       {
         name: '社交媒体库',
         path: 'social-medias',
-        component: () => import('@/views//data-collection/social-medias/index.vue'), //
+        component: () => import('@/views//database/social-medias/index.vue'), //
         meta: {
           title: '社交媒体库',
           icon: 'mdi:play-network',

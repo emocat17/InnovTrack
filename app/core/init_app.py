@@ -146,7 +146,7 @@ async def init_menus():
                 order=5,
                 parent_id=parent_menu.id,
                 icon="mingcute:department-line",
-                is_hidden=False,
+                is_hidden=True,
                 component="/system/dept",
                 keepalive=False,
             ),
@@ -163,19 +163,19 @@ async def init_menus():
             ),
         ]
         await Menu.bulk_create(children_menu)
-        # sidebar初始阿虎设置
-        # await Menu.create(
-        #     menu_type=MenuType.MENU,
-        #     name="一级菜单",
-        #     path="/top-menu",
-        #     order=2,
-        #     parent_id=0,
-        #     icon="material-symbols:featured-play-list-outline",
-        #     is_hidden=False,
-        #     component="/top-menu",
-        #     keepalive=False,
-        #     redirect="",
-        # )
+        # sidebar初始化设置
+        await Menu.create(
+            menu_type=MenuType.MENU,
+            name="一级菜单",
+            path="/top-menu",
+            order=2,
+            parent_id=0,
+            icon="material-symbols:featured-play-list-outline",
+            is_hidden=True,
+            component="/top-menu",
+            keepalive=False,
+            redirect="",
+        )
 
 
 async def init_apis():
