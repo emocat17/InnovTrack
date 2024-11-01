@@ -196,8 +196,6 @@ pnpm dev
 - **前端**
 
 1. 到`web/src/router/routes/index.js`中增加侧边栏的定义代码片段,举个例子:在export const basicRoutes 下找到合适的位置(我已经给出例子),增加对应的子目录和子菜单栏
-
-
       ```
       {
         name: t('数据收集'), 
@@ -251,6 +249,12 @@ pnpm dev
 
 2. 在`web/src/views`中合适位置新增页面,点击对应栏目就可以展示vue界面了
       创建文件夹,里面放一个vue文件
+      ```
+      views
+        └─ xxx (父模块目录 文件夹)    
+             └─ xxx (子模块菜单  文件夹)    
+                 └─index.vue   (网页界面文件) 
+        
 
 
 3. 在`web/src/api/index.js`中增加api的接口定义
@@ -263,8 +267,9 @@ pnpm dev
 - **后端**
 1. 在`app/controllers/`下增加模块操作文件，主要是供api中调用
 
+  
+  - document.py
     ```
-    # document.py
     import requests
     from bs4 import BeautifulSoup
 
@@ -286,8 +291,10 @@ pnpm dev
     ```
 
 2. 注册路由，`app/api/v1/`下新增api文件夹及对应文件(比如xxx模块,就建立xxx文件夹,里面放xxx.py和__init__.py)，并相应修改`app/api/v1/__init__.py`注册路由，这里使用了fastapi
+    
+  - #app/api/v1/document/__init__.py
+
     ```
-    #app/api/v1/document/__init__.py
     from fastapi import APIRouter
     from .document import router
 
@@ -299,8 +306,9 @@ pnpm dev
     __all__ = ["document_router"]
     ```
 
+    
+  - #app/api/v1/document/document.py
     ```
-    #app/api/v1/document/document.py
     from fastapi import APIRouter
     from app.controllers.document import document_controller
     from app.schemas import Success
