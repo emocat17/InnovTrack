@@ -7,5 +7,4 @@ router = APIRouter()
 @router.get("/fetch", summary="获取爬虫数据")
 async def fetch_document_data():
     data =  await document_controller.fetch_data()
-    return Success(data = data)
     return Success(data = data) 
