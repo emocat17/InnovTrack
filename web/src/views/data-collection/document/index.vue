@@ -22,7 +22,7 @@ export default {
     async fetchData() {
       try {
         const response = await api.fetchDocumentData()
-        this.content = response.data.content
+        this.content = response.data
       } catch (error) {
         console.error('获取数据失败', error)
       }

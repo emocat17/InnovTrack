@@ -1,10 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-from app.schemas.document import DocumentResponse
 
 class DocumentController:
     @staticmethod
-    async def fetch_data() -> DocumentResponse:
+    async def fetch_data():
         res = requests.get("https://www.tiobe.com/tiobe-index/")
         if res.status_code == 200:
             sp = BeautifulSoup(res.text, 'html.parser')
@@ -13,7 +12,7 @@ class DocumentController:
                 result = "TIOBE目前排名前10的编程语言是：\n" + "\n".join(
                     [f"Top {i+1}: {best[i].getText()}" for i in range(10)]
                 )
-                return DocumentResponse(content=result)
-        return DocumentResponse(content="获取数据失败")
+                return result
+        return result(content="获取数据失败")
 
 document_controller = DocumentController()
