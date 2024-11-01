@@ -183,7 +183,6 @@ pnpm dev
 - **注意!!!!!!!!!!!!!!!!!!!!**：在`pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple` 需要先注释掉`requirements.txt`中的`uvloop`，这个库不支持Windows，主要用于优化协程的事件循环，不安装也不影响运行
 - 模板的创建API功能和创建菜单是能创建，但是因为没有路由和控制器，是没有用的;只当是个样式模板。
 
-
 ---
 ---
 

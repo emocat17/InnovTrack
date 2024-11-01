@@ -146,7 +146,7 @@ async def init_menus():
                 order=5,
                 parent_id=parent_menu.id,
                 icon="mingcute:department-line",
-                is_hidden=True,
+                is_hidden=False,
                 component="/system/dept",
                 keepalive=False,
             ),
