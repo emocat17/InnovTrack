@@ -13,21 +13,8 @@ password：123456
 启动项目需要以下环境：
 - Python 3.11
 
-#### 方法一（推荐）：[Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) 安装依赖
-1. 创建虚拟环境
-```sh
-poetry shell
-```
-2. 安装依赖
-```sh
-poetry install
-```
-3. 启动服务
-```sh
-make run
-```
-#### 方法二：Pip 安装依赖
-1. 创建虚拟环境
+#### Pip 安装依赖
+1. 创建虚拟环境 Conda也行
 ```sh
 python3.11 -m venv venv
 ```
@@ -67,7 +54,7 @@ pnpm dev
 ```
 
 ### 目录说明
-
+- 仅供参考,`web`目录没标出
 ```
 ├── app                   // 应用程序目录
 │   ├── api               // API接口目录
@@ -128,9 +115,11 @@ pnpm dev
             ├── system     // 系统管理页面
             └── workbench  // 工作台页面
 ```
-
-
-##############################################################################
+---
+---
+---
+---
+---
 
 # vue-fastapi-admin 模板使用
 
@@ -197,9 +186,11 @@ pnpm dev
 - 模板的创建API功能和创建菜单是能创建，但是因为没有路由和控制器，是没有用的;只当是个样式模板。
 
 
-
-
-
+---
+---
+---
+---
+---
 
 # 具体操作示例Demo:以这个实际为准
 - **前端**
