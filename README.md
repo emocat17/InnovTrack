@@ -239,15 +239,21 @@ pnpm dev
         └─ xxx (父模块目录 文件夹)    
              └─ xxx (子模块菜单  文件夹)    
                  └─index.vue   (网页界面文件) 
-        
+      ```
 
 
 3. 在`web/src/api/index.js`中增加api的接口定义
     该文件的其他代码如何定义接口作为参考;
-
     ```
-    fetchDocumentData: () => request.get('/document/fetch'),
+    export default {
+    ...
+       fetchDocumentData: () => request.get('/document/fetch'),
+    ...
+    }
     ```
+    
+    
+    
 
 - **后端**
 1. 在`app/controllers/`下增加模块操作文件，主要是供api中调用;这里以爬取`tiobe`网站上最受欢迎的编程语言的前`10`在页面上进行浏览;
@@ -322,7 +328,7 @@ pnpm dev
 
     __all__ = ["api_router"]
     ```
-    
+
 
 3. 在`app/core/init_app.py`中增加初始化操作 (非必要操作,暂时不用)
 
