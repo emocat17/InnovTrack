@@ -305,6 +305,25 @@ pnpm dev
         data =  await document_controller.fetch_data()
         return Success(data = data) 
     ```
+
+  - 然后在上一级文件夹中的`__init__.py`中加入刚才配置的路由:
+    ```
+    from fastapi import APIRouter
+    from .v1 import v1_router
+
+
+    from .v1.document import document_router  # 新增
+
+    api_router = APIRouter()
+    api_router.include_router(v1_router, prefix="/v1")
+
+    api_router.include_router(document_router, prefix="/v1") #新增
+
+
+    __all__ = ["api_router"]
+    ```
+    
+
 3. 在`app/core/init_app.py`中增加初始化操作 (非必要操作,暂时不用)
 
 
