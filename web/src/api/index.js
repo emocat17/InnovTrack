@@ -40,8 +40,10 @@ export default {
   // auditlog
   getAuditLogList: (params = {}) => request.get('/auditlog/list', { params }),
 
+  
  //##################
- fetchDocumentData: () => request.get('/document/fetch'),
+  fetchDocumentData: () => request.get('/document/fetch'),
  //####################
+  downloadPapers: (data) => request.post('/paper/download-papers', data), //test
 
 }
