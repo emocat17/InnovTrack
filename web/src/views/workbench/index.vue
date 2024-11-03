@@ -10,7 +10,7 @@
                 <!-- {{ $t('views.workbench.text_hello', { username: userStore.name }) }} -->
                 {{ $t('多源异构数据自动化采集分析系统', { username: userStore.name }) }}
               </p>
-              <p mt-5 text-14 op-60>{{ $t('views.workbench.text_welcome') }}</p>
+              <!-- <p mt-5 text-14 op-60>{{ $t('views.workbench.text_welcome') }}</p> -->
             </div>
           </div>
           <!-- <n-space :size="12" :wrap="false">

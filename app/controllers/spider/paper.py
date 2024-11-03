@@ -81,7 +81,7 @@ async def fetch_papers(query, start_date, keyword):
 class ArxivDownloaderController:
     @staticmethod
     async def download_papers(keyword):
-        start_date = datetime(2010, 1, 1)
+        start_date = datetime(2020, 1, 1)
         papers_data = await fetch_papers(f'all:"{keyword}"', start_date, keyword)
 
         if not os.path.exists(keyword):

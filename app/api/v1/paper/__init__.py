@@ -5,5 +5,5 @@ paper_router = APIRouter()
 
 paper_router.include_router(router, tags=["爬取论文"])
 
-__all__ = ["document_router"]
+__all__ = ["paper_router"]
 
