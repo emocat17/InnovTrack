@@ -9,8 +9,9 @@ from .depts import depts_router
 from .menus import menus_router
 from .roles import roles_router
 from .users import users_router
-#
+#这边开始是新加的
 from .document import document_router
+from .arxiv import arxiv_router
 
 v1_router = APIRouter()
 
@@ -21,5 +22,9 @@ v1_router.include_router(menus_router, prefix="/menu", dependencies=[DependPermi
 v1_router.include_router(apis_router, prefix="/api", dependencies=[DependPermisson])
 v1_router.include_router(depts_router, prefix="/dept", dependencies=[DependPermisson])
 v1_router.include_router(auditlog_router, prefix="/auditlog", dependencies=[DependPermisson])
-#
+#这边开始是新加的
 v1_router.include_router(document_router, prefix="/document", dependencies=[DependPermisson])
+
+v1_router.include_router(arxiv_router, prefix="/arxiv", dependencies=[DependPermisson])
+
+

@@ -44,6 +44,6 @@ export default {
  //##################
   fetchDocumentData: () => request.get('/document/fetch'),
  //####################
-  downloadPapers: (data) => request.post('/paper/download-papers', data), //test
+  fetchArxivData: (keyword) => request.post('/arxiv/fetch-arxiv', { keyword }), // 新增
 
 }
