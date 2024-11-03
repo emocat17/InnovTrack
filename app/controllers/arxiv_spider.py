@@ -1,4 +1,4 @@
-# app/controllers/arxiv_controller.py
+# app/controllers/
 from datetime import datetime
 import requests
 import feedparser
