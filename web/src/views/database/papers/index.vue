@@ -81,10 +81,12 @@ onMounted(() => {
   <CommonPage>
     <div>
       <NInput
+      
         v-model:value="queryItems.keyword"
         placeholder="请输入关键词" 
         clearable
         @keypress.enter="$table?.handleSearch()"
+        style="width: 200px;"
       />
       <NButton @click="fetchData(queryItems.keyword)" style="margin-left: 10px;">
         加载数据
