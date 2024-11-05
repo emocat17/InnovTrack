@@ -6,12 +6,7 @@ import pandas as pd
 import os
 import re
 from concurrent.futures import ThreadPoolExecutor
-from fastapi.exceptions import HTTPException
-#自定义下载过程中提示DownloadProgressException
-class DownloadProgressException(Exception):
-    def __init__(self, message: str):
-        self.message = message
-        super().__init__(self.message)
+
 
 def clean_filename(title):
     illegal_chars_pattern = r'[\\/:*?"<>|\n]'
@@ -24,8 +19,10 @@ def download_pdf(pdf_url, title, year, quarter, keyword):
         os.makedirs(quarter_dir)
     safe_title = clean_filename(title)
     pdf_path = os.path.join(quarter_dir, f"{safe_title}.pdf")
+
     if os.path.exists(pdf_path):
         return f'文件已存在: {pdf_path}'
+    
     response = requests.get(pdf_url)
     with open(pdf_path, 'wb') as f:
         f.write(response.content)
