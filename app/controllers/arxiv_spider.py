@@ -6,7 +6,12 @@ import pandas as pd
 import os
 import re
 from concurrent.futures import ThreadPoolExecutor
-from fastapi import HTTPException
+from fastapi.exceptions import HTTPException
+#自定义下载过程中提示DownloadProgressException
+class DownloadProgressException(Exception):
+    def __init__(self, message: str):
+        self.message = message
+        super().__init__(self.message)
 
 def clean_filename(title):
     illegal_chars_pattern = r'[\\/:*?"<>|\n]'
@@ -76,9 +81,9 @@ class ArxivSpider:
         if not os.path.exists('Data'):
             os.makedirs('Data')
         query = f'all:"{keyword}"'
-        start_date = datetime(2023, 1, 1)
+        start_date = datetime(2020, 1, 1)
         papers_data = fetch_papers(query, start_date, keyword)
-        excel_filename = os.path.join('Data', keyword, f"{keyword}_papers.xlsx")
+        excel_filename = os.path.join('Data', keyword, f"{keyword} papers.xlsx")
         df = pd.DataFrame(papers_data)
         df.to_excel(excel_filename, index=False)
         return f"爬取完成，Excel表格已保存至 {excel_filename}"
