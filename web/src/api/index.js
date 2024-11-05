@@ -44,6 +44,6 @@ export default {
  //##################
   fetchDocumentData: () => request.get('/document/fetch'),
  //####################
-  fetchArxivData: (keyword) => request.post('/arxiv/fetch-arxiv', { keyword }), // 新增
+  fetchArxivData: (keyword) => request.post('/arxiv_spider/fetch-arxiv', { keyword }), // 新增
 
 }

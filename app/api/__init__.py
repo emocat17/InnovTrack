@@ -11,7 +11,7 @@ from .v1.document import document_router  # 新增
 api_router.include_router(document_router, prefix="/v1") #新增
 
 #论文爬虫
-from .v1.arxiv import arxiv_router
+from .v1.arxiv_spider import arxiv_router
 api_router.include_router(arxiv_router,prefix="/v1") 
 
 

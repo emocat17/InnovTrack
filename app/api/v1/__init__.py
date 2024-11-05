@@ -11,7 +11,7 @@ from .roles import roles_router
 from .users import users_router
 #这边开始是新加的
 from .document import document_router
-from .arxiv import arxiv_router
+from .arxiv_spider import arxiv_router
 
 v1_router = APIRouter()
 
@@ -25,6 +25,6 @@ v1_router.include_router(auditlog_router, prefix="/auditlog", dependencies=[Depe
 #这边开始是新加的
 v1_router.include_router(document_router, prefix="/document", dependencies=[DependPermisson])
 
-v1_router.include_router(arxiv_router, prefix="/arxiv", dependencies=[DependPermisson])
+v1_router.include_router(arxiv_router, prefix="/arxiv_spider", dependencies=[DependPermisson])
 
 

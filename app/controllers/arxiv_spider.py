@@ -80,7 +80,7 @@ class ArxivSpider:
         query = f'all:"{keyword}"'
         start_date = datetime(2020, 1, 1)
         papers_data = fetch_papers(query, start_date, keyword)
-        excel_filename = os.path.join('Data', keyword, f"{keyword} papers.xlsx")
+        excel_filename = os.path.join('Data', keyword, f"{keyword}_papers.xlsx")
         df = pd.DataFrame(papers_data)
         df.to_excel(excel_filename, index=False)
         return f"爬取完成，Excel表格已保存至 {excel_filename}"
