@@ -1,217 +1,114 @@
 <script setup>
-import { h, onMounted, ref, resolveDirective, withDirectives } from 'vue'
-import { NButton, NForm, NFormItem, NInput, NInputNumber, NPopconfirm, NTreeSelect } from 'naive-ui'
-
+import { onMounted, ref } from 'vue'
+import { NInput, NButton } from 'naive-ui'
 import CommonPage from '@/components/page/CommonPage.vue'
-import QueryBarItem from '@/components/query-bar/QueryBarItem.vue'
-import CrudModal from '@/components/table/CrudModal.vue'
 import CrudTable from '@/components/table/CrudTable.vue'
-import TheIcon from '@/components/icon/TheIcon.vue'
 
-import { renderIcon } from '@/utils'
-import { useCRUD } from '@/composables'
-// import { loginTypeMap, loginTypeOptions } from '@/constant/data'
 import api from '@/api'
 
-defineOptions({ name: '论文管理' })
+defineOptions({ name: '论文数据库展示' })
 
 const $table = ref(null)
 const queryItems = ref({})
-const vPermission = resolveDirective('permission')
-
-const {
-  modalVisible,
-  modalTitle,
-  modalLoading,
-  handleSave,
-  modalForm,
-  modalFormRef,
-  handleEdit,
-  handleDelete,
-  handleAdd,
-} = useCRUD({
-  name: 'API',
-  initForm: { order: 0 },
-  doCreate: api.createDept,
-  doUpdate: api.updateDept,
-  doDelete: api.deleteDept,
-  refresh: () => $table.value?.handleSearch(),
-})
-
-const deptOption = ref([])
-const isDisabled = ref(false)
-
-onMounted(() => {
-  $table.value?.handleSearch()
-  api.getDepts().then((res) => (deptOption.value = res.data))
-})
-
-const deptRules = {
-  name: [
-    {
-      required: true,
-      message: '请输入论文名称',
-      trigger: ['input', 'blur', 'change'],
-    },
-  ],
-}
-
-async function addDepts() {
-  isDisabled.value = false
-  handleAdd()
-}
 
 const columns = [
   {
-    title: '论文名称',
-    key: 'name',
+    title: '发布日期',
+    key: '发布日期',
     width: 'auto',
     align: 'center',
     ellipsis: { tooltip: true },
   },
   {
-    title: '备注',
-    key: 'desc',
+    title: '标题',
+    key: '标题',
+    width: 'auto',
+    align: 'center',
+    ellipsis: { tooltip: true },
+  },
+  {
+    title: '作者',
+    key: '作者',
     align: 'center',
     width: 'auto',
     ellipsis: { tooltip: true },
   },
   {
-    title: '操作',
-    key: 'actions',
-    width: 'auto',
+    title: '摘要',
+    key: '摘要',
     align: 'center',
-    fixed: 'right',
-    render(row) {
-      return [
-        withDirectives(
-          h(
-            NButton,
-            {
-              size: 'small',
-              type: 'primary',
-              style: 'margin-left: 8px;',
-              onClick: () => {
-                console.log('row', row.parent_id)
-                if (row.parent_id === 0) {
-                  isDisabled.value = true
-                } else {
-                  isDisabled.value = false
-                }
-                handleEdit(row)
-              },
-            },
-            {
-              default: () => '编辑',
-              icon: renderIcon('material-symbols:edit', { size: 16 }),
-            }
-          ),
-          [[vPermission, 'post/api/v1/dept/update']]
-        ),
-        h(
-          NPopconfirm,
-          {
-            onPositiveClick: () => handleDelete({ dept_id: row.id }, false),
-            onNegativeClick: () => {},
-          },
-          {
-            trigger: () =>
-              withDirectives(
-                h(
-                  NButton,
-                  {
-                    size: 'small',
-                    type: 'error',
-                    style: 'margin-left: 8px;',
-                  },
-                  {
-                    default: () => '删除',
-                    icon: renderIcon('material-symbols:delete-outline', { size: 16 }),
-                  }
-                ),
-                [[vPermission, 'delete/api/v1/dept/delete']]
-              ),
-            default: () => h('div', {}, '确定删除该论文吗?'),
-          }
-        ),
-      ]
-    },
+    width: 'auto',
+    ellipsis: { tooltip: true },
+  },
+  {
+    title: '链接',
+    key: '链接',
+    align: 'center',
+    width: 'auto',
+    ellipsis: { tooltip: true },
+  },
+  {
+    title: 'PDF链接',
+    key: 'PDF链接',
+    align: 'center',
+    width: 'auto',
+    ellipsis: { tooltip: true },
   },
 ]
+
+const data = ref([])
+
+// 获取Data文件夹中的数据（从后端接口）
+const fetchData = async (keyword) => {
+  try {
+    const response = await api.fetchArxivData(keyword)
+    // 假设后端返回的数据是excel文件中的内容
+    data.value = response.data // 根据后端返回的数据格式进行处理
+    $table.value?.handleSearch()
+  } catch (error) {
+    console.error('数据加载失败', error)
+  }
+}
+
+onMounted(() => {
+  // 你可以选择在页面加载时默认加载某个关键词的数据，或者让用户输入
+  fetchData('zero trust') // 使用你爬取的关键字，例：'zero trust'
+})
 </script>
 
 <template>
   <!-- 业务页面 -->
-  <CommonPage show-footer title="论文列表">
-    <template #action>
-      <div>
-        <NButton
-          v-permission="'post/api/v1/dept/create'"
-          class="float-right mr-15"
-          type="primary"
-          @click="addDepts"
-        >
-          <TheIcon icon="material-symbols:add" :size="18" class="mr-5" />新建论文
-        </NButton>
-      </div>
-    </template>
+  <CommonPage>
+    <div>
+      <NInput
+        v-model:value="queryItems.keyword"
+        placeholder="请输入关键词" 
+        clearable
+        @keypress.enter="$table?.handleSearch()"
+      />
+      <NButton @click="fetchData(queryItems.keyword)" style="margin-left: 10px;">
+        加载数据
+      </NButton>
+    </div>
+
     <!-- 表格 -->
     <CrudTable
       ref="$table"
       v-model:query-items="queryItems"
       :columns="columns"
-      :get-data="api.getDepts"
+      :data="data"
     >
       <template #queryBar>
-        <QueryBarItem label="论文名称" :label-width="80">
+        <QueryBarItem label="关键字" :label-width="70">
           <NInput
-            v-model:value="queryItems.name"
+            v-model:value="queryItems.keyword"
             clearable
             type="text"
-            placeholder="请输入论文名称"
+            placeholder="请输入关键词"
             @keypress.enter="$table?.handleSearch()"
           />
         </QueryBarItem>
       </template>
     </CrudTable>
-
-    <!-- 新增/编辑 弹窗 -->
-    <CrudModal
-      v-model:visible="modalVisible"
-      :title="modalTitle"
-      :loading="modalLoading"
-      @save="handleSave"
-    >
-      <NForm
-        ref="modalFormRef"
-        label-placement="left"
-        label-align="left"
-        :label-width="80"
-        :model="modalForm"
-        :rules="deptRules"
-      >
-        <NFormItem label="父级论文" path="parent_id">
-          <NTreeSelect
-            v-model:value="modalForm.parent_id"
-            :options="deptOption"
-            key-field="id"
-            label-field="name"
-            placeholder="请选择父级论文"
-            clearable
-            default-expand-all
-            :disabled="isDisabled"
-          ></NTreeSelect>
-        </NFormItem>
-        <NFormItem label="论文名称" path="name">
-          <NInput v-model:value="modalForm.name" clearable placeholder="请输入论文名称" />
-        </NFormItem>
-        <NFormItem label="备注" path="desc">
-          <NInput v-model:value="modalForm.desc" type="textarea" clearable />
-        </NFormItem>
-        <NFormItem label="排序" path="order">
-          <NInputNumber v-model:value="modalForm.order" min="0"></NInputNumber>
-        </NFormItem>
-      </NForm>
-    </CrudModal>
   </CommonPage>
 </template>
