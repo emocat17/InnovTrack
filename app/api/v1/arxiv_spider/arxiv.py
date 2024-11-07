@@ -6,7 +6,7 @@ from app.schemas.arxivschema import FetchArxivRequest
 
 router = APIRouter()
 
-@router.post("/fetch-arxiv",summary="爬取arxiv论文")
+@router.post("/fetch_arxiv",summary="爬取arxiv论文")
 
 # async def fetch_arxiv(request: FetchArxivRequest):  # 接收请求体
 #     data = await arxiv_spider.fetch_arxiv_data(request.keyword)  # 使用 request.keyword

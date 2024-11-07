@@ -42,8 +42,11 @@ export default {
 
   
  //##################
-  fetchDocumentData: () => request.get('/document/fetch'),
- //####################
-  fetchArxivData: (keyword) => request.post('/arxiv_spider/fetch-arxiv', { keyword }), // 新增
+  fetchDocumentData: () => request.get('/document/fetch'), //demo
+ //论文爬虫
+  fetchArxivData: (keyword) => request.post('/arxiv_spider/fetch_arxiv', { keyword }), // 新增
+  //获取本地数据库
+  getArxivDatabase: (keyword) => request.get('/arxiv_database/get_arxiv_database', { params: { keyword } }),
+
 
 }

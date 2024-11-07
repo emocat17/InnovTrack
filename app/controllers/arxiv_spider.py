@@ -31,9 +31,9 @@ def download_pdf(pdf_url, title, year, quarter, keyword):
 def fetch_papers(query, start_date, keyword):
     base_url = 'http://export.arxiv.org/api/query?'
     start = 0
-    max_results = 500
+    max_results = 1000 #一次性爬取的最大数目
     data = []
-    with ThreadPoolExecutor(max_workers=10) as executor:
+    with ThreadPoolExecutor(max_workers=10) as executor: #并发线程
         while True:
             params = {
                 'search_query': query,
@@ -47,6 +47,7 @@ def fetch_papers(query, start_date, keyword):
             if not feed.entries:
                 break
             for entry in feed.entries:
+                # 提取并格式化发布日期，只保留日期部分
                 published_date = datetime.strptime(entry.published.split('T')[0], '%Y-%m-%d')
                 if published_date < start_date:
                     continue
@@ -61,7 +62,8 @@ def fetch_papers(query, start_date, keyword):
                     download_message = download_pdf(pdf_link, entry.title, year, quarter, keyword)
 
                 data.append({
-                    '发布日期': entry.published,
+                    # 将日期格式化为仅包含年-月-日
+                    '发布日期': published_date.strftime('%Y-%m-%d'),
                     '标题': entry.title,
                     '作者': ', '.join(author.name for author in entry.authors),
                     '摘要': entry.summary,
@@ -71,7 +73,11 @@ def fetch_papers(query, start_date, keyword):
 
             start += len(feed.entries)
 
+    # 按照发布日期从最新到最老排序数据
+    data.sort(key=lambda x: x['发布日期'], reverse=True)
+    
     return data
+
 class ArxivSpider:
     @staticmethod
     async def fetch_arxiv_data(keyword):
@@ -80,6 +86,8 @@ class ArxivSpider:
         query = f'all:"{keyword}"'
         start_date = datetime(2020, 1, 1)
         papers_data = fetch_papers(query, start_date, keyword)
+        
+        # 将数据转换为 DataFrame 并保存为 Excel 文件
         excel_filename = os.path.join('Data', keyword, f"{keyword}_papers.xlsx")
         df = pd.DataFrame(papers_data)
         df.to_excel(excel_filename, index=False)
