@@ -7,7 +7,7 @@ class ArxivDatabase:
     @staticmethod
     async def read_paper_data(keyword):
         # 获取文件夹路径
-        data_folder = os.path.join('Data', keyword)
+        data_folder = os.path.join('Data', keyword, 'papers')  # 修改此行
         logging.info(f"尝试访问文件夹路径: {data_folder}")
         
         # 确保文件夹存在

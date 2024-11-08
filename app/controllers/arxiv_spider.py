@@ -14,11 +14,13 @@ def clean_filename(title):
     return safe_title
 
 def download_pdf(pdf_url, title, year, quarter, keyword):
-    quarter_dir = os.path.join('Data', keyword, str(year), f"Q{quarter}")
-    if not os.path.exists(quarter_dir):
-        os.makedirs(quarter_dir)
+    # 在 Data/keyword/papers/ 目录下创建文件夹结构
+    papers_dir = os.path.join('Data', keyword, 'papers', str(year), f"Q{quarter}")
+    if not os.path.exists(papers_dir):
+        os.makedirs(papers_dir)
+    
     safe_title = clean_filename(title)
-    pdf_path = os.path.join(quarter_dir, f"{safe_title}.pdf")
+    pdf_path = os.path.join(papers_dir, f"{safe_title}.pdf")
 
     if os.path.exists(pdf_path):
         return f'文件已存在: {pdf_path}'
@@ -83,12 +85,22 @@ class ArxivSpider:
     async def fetch_arxiv_data(keyword):
         if not os.path.exists('Data'):
             os.makedirs('Data')
+        
+        # 在 Data/keyword 下创建 papers 文件夹
+        keyword_dir = os.path.join('Data', keyword)
+        if not os.path.exists(keyword_dir):
+            os.makedirs(keyword_dir)
+
+        papers_dir = os.path.join(keyword_dir, 'papers')
+        if not os.path.exists(papers_dir):
+            os.makedirs(papers_dir)
+
         query = f'all:"{keyword}"'
-        start_date = datetime(2020, 1, 1)
+        start_date = datetime(2000, 1, 1)
         papers_data = fetch_papers(query, start_date, keyword)
         
         # 将数据转换为 DataFrame 并保存为 Excel 文件
-        excel_filename = os.path.join('Data', keyword, f"{keyword}_papers.xlsx")
+        excel_filename = os.path.join(papers_dir, f"{keyword}_papers.xlsx")
         df = pd.DataFrame(papers_data)
         df.to_excel(excel_filename, index=False)
         return f"爬取完成，Excel表格已保存至 {excel_filename}"

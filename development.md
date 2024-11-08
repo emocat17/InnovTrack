@@ -8,11 +8,10 @@
 
 ## 2. 要添加模块
 - **后端**
-  1. 增加对应的数据库数据，`app/models/admin.py`下新增数据库类，这里使用了`tortoise`进行数据库操作
-  2. 在`app/schemas/`下新增对应的数据（结构模型）验证文件，这里使用了`Pydantic`进行定义数据模型，并使用这些模型对数据进行验证和转换。
-  3. 在`app/controllers/`下增加模块操作文件，主要是供API中调用
-  4. 注册路由，`app/api/v1/`下新增API文件夹及对应文件，并相应修改`app/api/v1/__init__.py`，这里使用了`fastapi`
-  5. 在`app/core/init_app.py`中增加初始化操作
+  1. 增加对应的数据库数据，`app/models/admin.py`下新增数据库类，这里使用了`tortoise`进行数据库操作(没使用到可以不加)
+  2. 在`app/schemas/`下新增对应的数据（结构模型）验证文件，这里使用了`Pydantic`进行定义数据模型，并使用这些模型对数据进行验证和转换。(无特定数据校验可以不用)
+  3. 在`app/controllers/`下增加模块操作文件，主要是供API中调用(主要逻辑,比如爬虫代码什么的,供调用)
+  4. 注册路由，`app/api/v1/`下新增API文件夹及对应文件，并相应修改`app/api/v1/__init__.py`，这里使用了`fastapi` (其中`app/api/__init__.py`也一起改,内容在对应代码文件中都有,可以参考)
 
 - **前端**
   1. 在`web/src/api/index.js`中增加API的接口定义

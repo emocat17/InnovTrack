@@ -13,6 +13,7 @@ const queryItems = ref({ keyword: 'zero trust' })  // 用于存储查询关键�
 
 // 表格的列配置
 const columns = [
+  { title: '序号', key: '序号', align: 'center', width: 60, render(row, index) {return index + 1  }},
   { title: '发布日期', key: '发布日期', align: 'center', width: 120, ellipsis: { tooltip: true }},
   { title: '标题', key: '标题', align: 'center'},
   { title: '作者', key: '作者', align: 'center'}, //, ellipsis: { tooltip: true } :使数据不会被截断;摘要太长了加上截断

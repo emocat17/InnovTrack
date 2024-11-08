@@ -35,7 +35,7 @@ export default {
         return
       }
       
-      this.message = `正在下载与"${this.keyword}"相关的论文...`
+      this.message = `正在下载与"${this.keyword}"相关的论文...请稍后......`
       try {
         await api.fetchArxivData(this.keyword)
         this.message = `下载完成！`
