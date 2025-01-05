@@ -31,6 +31,7 @@ password：123456
 3. 安装依赖
 ```sh
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+我是用的requirements3.txt，让系统自行选择；
 ```
 3. 启动服务
 ```sh
