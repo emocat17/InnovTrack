@@ -28,6 +28,7 @@ MarkupSafe
 mdurl
 mypy-extensions
 orjson
+openpyxl
 packaging
 passlib
 pandas
