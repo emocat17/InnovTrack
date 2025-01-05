@@ -51,9 +51,10 @@ cd web
 
 2. 安装依赖(建议使用pnpm: https://pnpm.io/zh/installation)
 ```sh
-npm i -g pnpm # 已安装可忽略 
-pnpm i # 或者 npm i
+npm i -g pnpm # 已安装可忽略 ；如果安装不了请查找：npm换源
+pnpm i # 或者 npm i    如果报错：”pnpm无法加载文件 。。。。系统禁止运行脚本“  错误，那么可以在windows电脑上打开PowerShell（管理员），输入“set-ExecutionPolicy RemoteSigned”后回车，再输入“Y”即可；
 ```
+
 
 3. 启动
 ```sh

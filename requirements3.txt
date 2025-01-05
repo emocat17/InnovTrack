@@ -13,6 +13,7 @@ dnspython
 email_validator
 fastapi
 fastapi-cli
+feedparser
 h11
 httpcore
 httptools
@@ -29,6 +30,7 @@ mypy-extensions
 orjson
 packaging
 passlib
+pandas
 pathspec
 platformdirs
 pycparser
