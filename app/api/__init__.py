@@ -17,4 +17,7 @@ api_router.include_router(arxiv_router,prefix="/v1")
 from .v1.arxiv_database import arxiv_database_router
 api_router.include_router(arxiv_database_router,prefix="/v1")
 
+from .v1.WIPO_spider import WIPO_spider_router
+api_router.include_router(WIPO_spider_router,prefix="/v1")
+
 __all__ = ["api_router"]
