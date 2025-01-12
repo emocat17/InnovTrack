@@ -129,7 +129,7 @@ pnpm dev
 # thanks
 - `https://github.com/mizhexiaoxiao/vue-fastapi-admin` [原仓库](https://github.com/mizhexiaoxiao/vue-fastapi-admin)
 - `jsly`
-
+######################分割线######################################
 # 本地文件转图数据库教程
 
 - https://blog.csdn.net/wang_x_f911/article/details/139007588

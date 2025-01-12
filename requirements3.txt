@@ -49,6 +49,7 @@ rich
 ruff
 setuptools
 shellingham
+selenium
 sniffio
 starlette
 tomlkit
