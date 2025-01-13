@@ -21,7 +21,7 @@ class Crawler:
         self.chrome_options = Options()
         # chrome_options.add_argument('--headless')
         self.chrome_options.add_argument('--disable-gpu')
-
+        self.chrome_options.add_argument("--proxy-server=http://127.0.0.1:7890")#使用本地代理
         current_dir = os.path.dirname(os.path.abspath(__file__))
         # self.ser = Service('chromedriver-win64\chromedriver.exe')
         self.ser = Service(os.path.join(current_dir, 'chromedriver-win64\chromedriver.exe'))
