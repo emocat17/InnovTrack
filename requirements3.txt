@@ -5,6 +5,7 @@ anyio
 argon2-cffi
 argon2-cffi-bindings
 black
+bs4
 certifi
 cffi
 click
@@ -47,6 +48,7 @@ pytz
 PyYAML
 rich
 ruff
+requests
 setuptools
 shellingham
 selenium
