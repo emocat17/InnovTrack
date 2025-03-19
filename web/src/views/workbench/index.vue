@@ -4,18 +4,17 @@
       <n-card rounded-10>
         <div flex items-center justify-between>
           <div flex items-center>
-            <!-- <img rounded-full width="60" :src="userStore.avatar" /> -->
+            <img rounded-full width="60" :src="userStore.avatar" />
             <div ml-10>
               <p text-20 font-semibold>
-                <!-- {{ $t('views.workbench.text_hello', { username: userStore.name }) }} -->
-                {{ $t('多源异构数据自动化采集分析系统', { username: userStore.name }) }}
+                {{ $t('views.workbench.text_hello', { username: userStore.name }) }}
               </p>
-              <!-- <p mt-5 text-14 op-60>{{ $t('views.workbench.text_welcome') }}</p> -->
+              <p mt-5 text-14 op-60>{{ $t('views.workbench.text_welcome') }}</p>
             </div>
           </div>
-          <!-- <n-space :size="12" :wrap="false">
+          <n-space :size="12" :wrap="false">
             <n-statistic v-for="item in statisticData" :key="item.id" v-bind="item"></n-statistic>
-          </n-space> -->
+          </n-space>
         </div>
       </n-card>
 
@@ -31,11 +30,11 @@
         </template>
         <div flex flex-wrap justify-between>
           <n-card
-            v-for="i in 20"
+            v-for="i in 9"
             :key="i"
             class="mb-10 mt-10 w-300 cursor-pointer"
             hover:card-shadow
-            title="InnovTrace_test_1"
+            title="Vue FastAPI Admin"
             size="small"
           >
             <p op-60>{{ dummyText }}</p>
@@ -50,7 +49,7 @@
 import { useUserStore } from '@/store'
 import { useI18n } from 'vue-i18n'
 
-const dummyText = 'Vue3+FastAPI+Naive UI 的数据自动化采集系统'
+const dummyText = '一个基于 Vue3.0、FastAPI、Naive UI 的轻量级后台管理模板'
 const { t } = useI18n({ useScope: 'global' })
 
 const statisticData = computed(() => [

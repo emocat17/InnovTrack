@@ -28,6 +28,7 @@ def download_pdf(pdf_url, title, year, quarter, keyword):
     response = requests.get(pdf_url)
     with open(pdf_path, 'wb') as f:
         f.write(response.content)
+    print(f'正在下载文件: {pdf_path}')
     return f'正在下载文件: {pdf_path}'
 
 def fetch_papers(query, start_date, keyword):
@@ -88,8 +89,7 @@ class ArxivSpider:
         
         # 在 Data/keyword 下创建 papers 文件夹
         keyword_dir = os.path.join('Data', keyword)
-        if not os.path.exists(keyword_dir):
-            os.makedirs(keyword_dir)
+        os.makedirs(keyword_dir, exist_ok=True)  # 使用exist_ok简化目录创建
 
         papers_dir = os.path.join(keyword_dir, 'papers')
         if not os.path.exists(papers_dir):
@@ -103,6 +103,7 @@ class ArxivSpider:
         excel_filename = os.path.join(papers_dir, f"{keyword}_papers.xlsx")
         df = pd.DataFrame(papers_data)
         df.to_excel(excel_filename, index=False)
+        print(f"爬取完成，Excel表格已保存至 {excel_filename}")
         return f"爬取完成，Excel表格已保存至 {excel_filename}"
     
 arxiv_spider = ArxivSpider()

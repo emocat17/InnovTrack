@@ -1,26 +1,13 @@
 import uvicorn
+from uvicorn.config import LOGGING_CONFIG
 
 if __name__ == "__main__":
-    uvicorn.run(
-        "app:app",
-        host="0.0.0.0",
-        port=9999,
-        reload=True,
-        log_config="uvicorn_loggin_config.json"
-    )
+    # 修改默认日志配置
+    LOGGING_CONFIG["formatters"]["default"]["fmt"] = "%(asctime)s - %(levelname)s - %(message)s"
+    LOGGING_CONFIG["formatters"]["default"]["datefmt"] = "%Y-%m-%d %H:%M:%S"
+    LOGGING_CONFIG["formatters"]["access"][
+        "fmt"
+    ] = '%(asctime)s - %(levelname)s - %(client_addr)s - "%(request_line)s" %(status_code)s'
+    LOGGING_CONFIG["formatters"]["access"]["datefmt"] = "%Y-%m-%d %H:%M:%S"
 
-# import asyncio
-# import uvicorn
-
-# # 为 Windows 设置事件循环策略
-# asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
-# if __name__ == "__main__":
-#     uvicorn.run(
-#         "app:app",
-#         host="0.0.0.0",
-#         port=9999,
-#         reload=True,
-#         log_config="uvicorn_loggin_config.json",
-#         loop="asyncio"  # 设置为原生 asyncio 事件循环
-#     )
+    uvicorn.run("app:app", host="0.0.0.0", port=9999, reload=True, log_config=LOGGING_CONFIG)

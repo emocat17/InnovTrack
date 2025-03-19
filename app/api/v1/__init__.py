@@ -24,6 +24,7 @@ v1_router.include_router(menus_router, prefix="/menu", dependencies=[DependPermi
 v1_router.include_router(apis_router, prefix="/api", dependencies=[DependPermisson])
 v1_router.include_router(depts_router, prefix="/dept", dependencies=[DependPermisson])
 v1_router.include_router(auditlog_router, prefix="/auditlog", dependencies=[DependPermisson])
+
 #这边开始是新加的
 v1_router.include_router(document_router, prefix="/document", dependencies=[DependPermisson]) #demo
 
@@ -32,4 +33,3 @@ v1_router.include_router(arxiv_router, prefix="/arxiv_spider", dependencies=[Dep
 v1_router.include_router(arxiv_database_router, prefix="/arxiv_database",dependencies=[DependPermisson])
 
 v1_router.include_router(WIPO_spider_router, prefix="/WIPO_spider", dependencies=[DependPermisson]) #WIPO专利爬虫
-

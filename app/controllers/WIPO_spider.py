@@ -24,7 +24,7 @@ class Crawler:
         self.chrome_options.add_argument("--proxy-server=http://127.0.0.1:7890")#使用本地代理
         current_dir = os.path.dirname(os.path.abspath(__file__))
         # self.ser = Service('chromedriver-win64\chromedriver.exe')
-        self.ser = Service(os.path.join(current_dir, 'chromedriver-win64\chromedriver.exe'))
+        self.ser = Service(os.path.join(current_dir, 'chromedriver-win64\\chromedriver.exe'))
 
         self.driver = webdriver.Chrome(options=self.chrome_options, service=self.ser)
         self.action = ActionChains(self.driver)
@@ -118,7 +118,7 @@ class Crawler:
         try:
             pageNum_xpath = '//*[@id="resultListCommandsForm:invalidPageNumber"]/span'
             pageNum = (int)(self.GetInfoByXpath(pageNum_xpath)[0].text.split('/')[-1].strip())  # 获取最大
-            # pageNum = 98  # 手动设置爬取的页数
+            pageNum = 1  # 手动设置爬取的页数
             count = 1
             for i in range(pageNum):
                 for tr in self.GetInfoByXpath('//*[@id="resultListForm:resultTable_data"]/tr'):
@@ -175,8 +175,10 @@ class Crawler:
                         '/html/body/div[2]/div[5]/div/div[1]/div[2]/form/div/div/div/div[1]/div/div/div[2]/div/div[2]/div')
                     for info in infos:
                         label = self.GetInfoByXpath('./span[1]', driver=info)[0].text
-                        if label == '标题': data[5] = self.GetInfoByXpath('./span[2]', driver=info)[0].text
-                        if label == '摘要': data[6] = self.GetInfoByXpath('./span[2]', driver=info)[0].text
+                        if label == '标题': 
+                            data[5] = self.GetInfoByXpath('./span[2]', driver=info)[0].text
+                        if label == '摘要': 
+                            data[6] = self.GetInfoByXpath('./span[2]', driver=info)[0].text
                     if self.GetInfoByXpath(li_xpath)[1].text == '说明书':
                         self.GetInfoByXpath(li_xpath)[1].click()
                         data[7] = self.GetInfoByXpath('//*[@id="detailMainForm:MyTabViewId:descriptionPanel"]')[0].text
@@ -258,9 +260,9 @@ class Crawler:
         for data in final_data:
             title = data[0]
 
-            # 截断标题至最大240字符
-            if len(title) > 240:
-                title = title[:240]
+            # 截断标题至最大100字符
+            if len(title) > 100:
+                title = title[:100]
 
             # 替换文件名中的非法字符
             title = title.replace("/", "_").replace("\\", "_").replace(":", "_").replace("*", "_") \

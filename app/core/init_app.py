@@ -7,7 +7,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from tortoise.expressions import Q
 
 from app.api import api_router
-
 from app.controllers.api import api_controller
 from app.controllers.user import UserCreate, user_controller
 from app.core.exceptions import (
@@ -44,6 +43,7 @@ def make_middlewares():
             HttpAuditLogMiddleware,
             methods=["GET", "POST", "PUT", "DELETE"],
             exclude_paths=[
+                "/api/v1/base/access_token",
                 "/docs",
                 "/openapi.json",
             ],
@@ -62,7 +62,6 @@ def register_exceptions(app: FastAPI):
 
 def register_routers(app: FastAPI, prefix: str = "/api"):
     app.include_router(api_router, prefix=prefix)
-    # app.include_router(tiobe_router, prefix=f"{prefix}/tiobe", tags=["TIOBE模块"])
 
 
 async def init_superuser():
@@ -163,7 +162,6 @@ async def init_menus():
             ),
         ]
         await Menu.bulk_create(children_menu)
-        # sidebar初始化设置
         await Menu.create(
             menu_type=MenuType.MENU,
             name="一级菜单",
@@ -171,7 +169,7 @@ async def init_menus():
             order=2,
             parent_id=0,
             icon="material-symbols:featured-play-list-outline",
-            is_hidden=True,
+            is_hidden=False,
             component="/top-menu",
             keepalive=False,
             redirect="",
@@ -233,9 +231,3 @@ async def init_data():
     await init_menus()
     await init_apis()
     await init_roles()
-
-
-
-
-
-

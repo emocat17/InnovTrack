@@ -95,6 +95,8 @@ export const basicRoutes = [
       },
     ],
   },
+
+
   //侧边栏增加自己想要的页面操作
   ///////////////////START///////////////////////////////
   {
@@ -195,6 +197,9 @@ export const basicRoutes = [
     ],
   },
   //////////////////////END//////////////////////////////
+
+
+
   {
     name: '403',
     path: '/403',
@@ -216,7 +221,6 @@ export const basicRoutes = [
       title: '登录页',
     },
   },
-
 ]
 
 export const NOT_FOUND_ROUTE = {

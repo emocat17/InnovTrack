@@ -46,12 +46,6 @@
       "message_password_confirmation_required": "请再次输入密码",
       "message_password_confirmation_diff": "两次密码输入不一致"
     },
-    
-    "data-collection": {
-      "document": "文档收集",
-      "label_data_collection": "数据收集"
-    },
-
     "errors": {
       "label_error": "错误页",
       "text_back_to_home": "返回首页"
