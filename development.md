@@ -34,7 +34,7 @@
 - **前端**
   - 进入前端目录 `cd web`
   - 安装依赖（建议使用pnpm）：`pnpm i` 或者 `npm i`
-    - `npm install pnpm -g`
+    - `npm i -g pnpm`
     - 如果网络不通可以先换源：
       ```bash
       pnpm config set registry https://registry.npmmirror.com
