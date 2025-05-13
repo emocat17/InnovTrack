@@ -9,9 +9,17 @@ from concurrent.futures import ThreadPoolExecutor
 
 
 def clean_filename(title):
+    # 替换非法字符为空格
     illegal_chars_pattern = r'[\\/:*?"<>|\n]'
     safe_title = re.sub(illegal_chars_pattern, ' ', title)
-    return safe_title
+    # 合并连续空格为单个下划线
+    safe_title = re.sub(r'\s+', '_', safe_title.strip())
+    # 移除特殊符号并限制长度
+    safe_title = re.sub(r'[^\w\s-]', '', safe_title)[:124]  # 保留字母、数字、下划线和短横线
+    # 再次处理可能生成的尾部下划线
+    safe_title = safe_title.strip('_')
+    # 最终长度限制（处理多字节字符）
+    return safe_title[:123] if len(safe_title) > 123 else safe_title
 
 def download_pdf(pdf_url, title, year, quarter, keyword):
     # 在 Data/keyword/papers/ 目录下创建文件夹结构
