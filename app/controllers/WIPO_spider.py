@@ -118,7 +118,7 @@ class Crawler:
         try:
             pageNum_xpath = '//*[@id="resultListCommandsForm:invalidPageNumber"]/span'
             pageNum = (int)(self.GetInfoByXpath(pageNum_xpath)[0].text.split('/')[-1].strip())  # 获取最大
-            pageNum = 1  # 手动设置爬取的页数
+            pageNum = 49  # 手动设置爬取的页数
             count = 1
             for i in range(pageNum):
                 for tr in self.GetInfoByXpath('//*[@id="resultListForm:resultTable_data"]/tr'):
@@ -261,8 +261,8 @@ class Crawler:
             title = data[0]
 
             # 截断标题至最大100字符
-            if len(title) > 100:
-                title = title[:100]
+            if len(title) > 123:
+                title = title[:123]
 
             # 替换文件名中的非法字符
             title = title.replace("/", "_").replace("\\", "_").replace(":", "_").replace("*", "_") \
