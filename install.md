@@ -105,6 +105,8 @@ cd web
 npm i -g pnpm # 已安装可忽略
 pnpm i # 或者 npm i
 ```
+- 若是出现Warning：Ignored build scripts: esbuild, vue-demi.  Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts. 
+- 直接运行`pnpm approve-builds`,按照提示先按`a`选择全部包， 再按`y`同意安装即可，   这是因为pnpm会自动忽略一些包的构建，
 
 3. 启动
 ```sh
