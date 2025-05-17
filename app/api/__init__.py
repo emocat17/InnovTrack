@@ -10,14 +10,14 @@ from .v1.WIPO_spider import WIPO_spider_router
 api_router = APIRouter()
 api_router.include_router(v1_router, prefix="/v1")
 
-
+# demo
 api_router.include_router(document_router, prefix="/v1") #demo
 
-#论文爬虫路由
+# 论文爬虫路由
 
 api_router.include_router(arxiv_router,prefix="/v1") 
 
-#论文获取本地数据库路由
+# 论文获取本地数据库路由
 
 api_router.include_router(arxiv_database_router,prefix="/v1")
 
