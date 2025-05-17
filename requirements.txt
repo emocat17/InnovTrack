@@ -59,3 +59,7 @@ uvloop==0.21.0; sys_platform != 'win32'
 winloop
 watchfiles==1.0.4
 websockets==14.1
+
+
+anaconda-cloud-auth>=0.7.1
+watchdog==4.0.1

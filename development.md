@@ -171,7 +171,7 @@
     ```
 
 2. 注册路由，`app/api/v1/`下新增api文件夹及对应文件(比如xxx模块,就建立xxx文件夹,里面放xxx.py和__init__.py)，并相应修改`app/api/v1/__init__.py`注册路由，这里使用了fastapi
-    
+  - 修改文件1：
   - #app/api/v1/document/__init__.py
 
     ```
@@ -186,7 +186,7 @@
     __all__ = ["document_router"]
     ```
 
-    
+  - 修改文件二：
   - #app/api/v1/document/document.py
     ```
     from fastapi import APIRouter
@@ -206,7 +206,6 @@
     from fastapi import APIRouter
     from .v1 import v1_router
 
-
     from .v1.document import document_router  # 新增
 
     api_router = APIRouter()
@@ -220,6 +219,21 @@
 
 
 3. 在`app/core/init_app.py`中增加初始化操作 (非必要操作,暂时不用)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 具体操作示例Demo:以这个示例为准
 - **前端**
