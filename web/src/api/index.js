@@ -48,4 +48,6 @@ export default {
   getArxivDatabase: (keyword) => request.get('/arxiv_database/get_arxiv_database', { params: { keyword } }),
   //WIPO专利爬虫
   fetchWIPOData: (keyword) => request.post('/WIPO_spider/fetch_WIPO', { keyword }),
+
+  runTwitterTagScraper: (params) => request.post('/twitter/run_scraper', params),
 }

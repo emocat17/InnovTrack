@@ -1,0 +1,4 @@
+httpx==0.28.1
+XClientTransaction
+x_client_transaction
+# pip install XClientTransaction -U --no-cache-dir  

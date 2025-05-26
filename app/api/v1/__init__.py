@@ -14,6 +14,7 @@ from .document import document_router #demo
 from .arxiv_spider import arxiv_router #arxiv爬虫路由配置导入
 from .arxiv_database import arxiv_database_router #arxiv论文本地数据导入
 from .WIPO_spider import WIPO_spider_router #WIPO爬虫路由配置导入
+from .twitter import twitter_router as new_twitter_scraper_router 
 
 v1_router = APIRouter()
 
@@ -33,3 +34,5 @@ v1_router.include_router(arxiv_router, prefix="/arxiv_spider", dependencies=[Dep
 v1_router.include_router(arxiv_database_router, prefix="/arxiv_database",dependencies=[DependPermisson])
 
 v1_router.include_router(WIPO_spider_router, prefix="/WIPO_spider", dependencies=[DependPermisson]) #WIPO专利爬虫
+
+v1_router.include_router(new_twitter_scraper_router, prefix="/twitter", dependencies=[DependPermisson]) 

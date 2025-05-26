@@ -145,6 +145,15 @@ export const basicRoutes = [
           icon: 'mdi:play-network',
         },
       },
+      {
+        name: 'Twitter收集',
+        path: 'twitter-tag-scraper',
+        component: () => import('@/views/data-collection/twitter-tag-scraper/index.vue'), //
+        meta: {
+          title: 'Twitter标签爬虫',
+          icon: 'mdi:play-network', // Example icon
+        },
+      },
     ],
   },
   ///////////////////////////数据库栏目////////////////////////////////////

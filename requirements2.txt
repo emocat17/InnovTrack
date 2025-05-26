@@ -5,7 +5,7 @@ pandas
 selenium
 bs4
 openpyxl
-
+httpx
 
 # twitter
 httpx==0.28.1
