@@ -40,13 +40,12 @@ export default {
   // auditlog
   getAuditLogList: (params = {}) => request.get('/auditlog/list', { params }),
 
-  //
-   //##################
-   fetchDocumentData: () => request.get('/document/fetch'), //demo
-   //论文爬虫
-    fetchArxivData: (keyword) => request.post('/arxiv_spider/fetch_arxiv', { keyword }), // 新增
-    //获取本地数据库
-    getArxivDatabase: (keyword) => request.get('/arxiv_database/get_arxiv_database', { params: { keyword } }),
-    //WIPO专利爬虫
-    fetchWIPOData: (keyword) => request.post('/WIPO_spider/fetch_WIPO', { keyword }),
+  //##################
+  fetchDocumentData: () => request.get('/document/fetch'), //demo
+  //论文爬虫
+  fetchArxivData: (keyword) => request.post('/arxiv_spider/fetch_arxiv', { keyword }), // 新增
+  //获取本地数据库
+  getArxivDatabase: (keyword) => request.get('/arxiv_database/get_arxiv_database', { params: { keyword } }),
+  //WIPO专利爬虫
+  fetchWIPOData: (keyword) => request.post('/WIPO_spider/fetch_WIPO', { keyword }),
 }
