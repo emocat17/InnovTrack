@@ -12,34 +12,33 @@ from url_utils import quote_url
 from transaction_generate import get_url_path
 from transaction_generate import get_transaction_id
 
-##########配置区域##########
-
-cookie = 'auth_token=10c4e0e1d88032fdf547955c3b75acd581e47637; ct0=dc1ea6c5ca93ecad205e85d6388d69c57cc840da98c085dba5663befcf38812326dd6bd1622545e3a1cd8b2b26289deb5c8718c11eed55be37503fa61eb6e59440cdfb8fcb8dd1e1fffb162f66ff8556;'
+with open('settings.json', 'r', encoding='utf-8') as f:
+        settings = json.load(f)
+cookie = settings['cookie']
+# cookie = 'auth_token=79dbe246d6b57f9b5f28678447b09578b710ed2e; ct0=635cb6aa3b218d798dd2f9c5907d157b925ac12d1a0168e3dcd1e2904893cc08e6e268cee84839bba482dfad91d4675707e3ac2078b2cfd5c45a164b9ef238418db736481d1c54a58d794f7a1ac0fadb;'
 # 填入 cookie (auth_token与ct0字段) //重要:替换掉其中的x即可, 注意不要删掉分号
-
-tag = '#zero-trust'
+tag = settings['tag']
+# tag = settings['#zero-trust']
 # 填入tag 带上#号 可留空
-_filter = "(#ZeroTrust) until:2025-05-17 since:2025-01-01"
+# _filter = "(#ZeroTrust) until:2025-05-17 since:2025-01-01"
+_filter = settings['_filter']
 # (可选项) 高级搜索
 # 请在 https://x.com/search-advanced 中组装搜索条件，复制搜索栏的内容填入_filter
 # 注意，_filter中所有出现的双引号都需要改为单引号或添加转义符 例如 "Monika" -> 'Monika'
 
 down_count = 10000
-# 因为搜索结果数量可能极大，故手动确定下载总量(近似)，填50的倍数，最少50
 
 media_latest = False
 # media_latest为True时，对应 [最新] 标签页，False对应 [媒体] 标签页 (与文本模式无关)
 # 开启时建议 _filter 设置为 _filter = 'filter:links -filter:replies'
 
-# ------------------------ #
 
 text_down = False
-# 开启后变为文本下载模式，会消耗大量API次数
+# 文本下载模式，会消耗大量API次数
 # 开启文本下载时 不要包含 filter:links
 
-##########配置区域##########
-
-max_concurrent_requests = 8     #最大并发数量，默认为8，遇到多次下载失败时适当降低
+#最大并发数量，遇到多次下载失败时适当降低
+max_concurrent_requests = 4 
 
 if text_down:
     entries_count = 20
@@ -161,6 +160,7 @@ class tag_down():
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
             'authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA',
         }
+        
         self._headers['cookie'] = cookie
         re_token = 'ct0=(.*?);'
         self._headers['x-csrf-token'] = re.findall(re_token, cookie)[0]

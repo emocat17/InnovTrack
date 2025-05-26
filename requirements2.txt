@@ -1,12 +1,13 @@
-# 该文件夹为补充，若新增的页面有用到新的python包，可以直接添加在这里
+# arxiv
 requests
-# uvicorn
-# fastapi
-# pydantic[email]
-# passlib
-# loguru
 feedparser
 pandas
 selenium
 bs4
 openpyxl
+
+
+# twitter
+httpx==0.28.1
+XClientTransaction
+# pip install XClientTransaction -U --no-cache-dir  
