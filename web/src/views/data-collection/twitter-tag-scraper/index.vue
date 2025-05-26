@@ -4,10 +4,10 @@
             <n-form ref="formRef" :model="formModel" :rules="rules" label-placement="left" label-width="auto"
                 require-mark-placement="right-hanging">
                 <n-grid :cols="2" :x-gap="24">
-                    <n-form-item-gi label="存储关键词 (Keyword)" path="keyword">
-                        <n-input v-model:value="formModel.keyword" placeholder="用于创建数据文件夹, e.g., AIResearch" />
+                    <n-form-item-gi label="存储文件夹名称" path="keyword">
+                        <n-input v-model:value="formModel.keyword" placeholder="用于创建数据文件夹命名" />
                     </n-form-item-gi>
-                    <n-form-item-gi label="主要搜索标签 (Tag)" path="tag">
+                    <n-form-item-gi label="搜索标签 (Tag)" path="tag">
                         <n-input v-model:value="formModel.tag" placeholder="e.g., #ZeroTrust (可选)" />
                     </n-form-item-gi>
 
