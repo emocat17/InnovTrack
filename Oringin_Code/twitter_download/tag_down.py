@@ -11,34 +11,81 @@ from urllib.parse import quote
 from url_utils import quote_url
 from transaction_generate import get_url_path
 from transaction_generate import get_transaction_id
-
-with open('settings.json', 'r', encoding='utf-8') as f:
-        settings = json.load(f)
-cookie = settings['cookie']
-# cookie = 'auth_token=79dbe246d6b57f9b5f28678447b09578b710ed2e; ct0=635cb6aa3b218d798dd2f9c5907d157b925ac12d1a0168e3dcd1e2904893cc08e6e268cee84839bba482dfad91d4675707e3ac2078b2cfd5c45a164b9ef238418db736481d1c54a58d794f7a1ac0fadb;'
-# 填入 cookie (auth_token与ct0字段) //重要:替换掉其中的x即可, 注意不要删掉分号
-tag = settings['tag']
-# tag = settings['#zero-trust']
+# 填入 cookie , 不要删掉分号
+cookie = 'auth_token=79dbe246d6b57f9b5f28678447b09578b710ed2e; ct0=635cb6aa3b218d798dd2f9c5907d157b925ac12d1a0168e3dcd1e2904893cc08e6e268cee84839bba482dfad91d4675707e3ac2078b2cfd5c45a164b9ef238418db736481d1c54a58d794f7a1ac0fadb;'
 # 填入tag 带上#号 可留空
-# _filter = "(#ZeroTrust) until:2025-05-17 since:2025-01-01"
-_filter = settings['_filter']
-# (可选项) 高级搜索
-# 请在 https://x.com/search-advanced 中组装搜索条件，复制搜索栏的内容填入_filter
-# 注意，_filter中所有出现的双引号都需要改为单引号或添加转义符 例如 "Monika" -> 'Monika'
+tag = ''
+
+# -------------------------advanced search--------------------------------------------- 
+search_all_these_words = ""  # Example: "what's happening"
+search_exact_phrase = ""      # Example: "happy hour" (will be enclosed in quotes)
+search_any_of_these_keywords = "" # Example: "cats dogs" (will be enclosed in parentheses)
+search_none_of_these_words = "" # Example: "cats dogs" (each word will be prefixed with -)
+search_hashtags = ["#ZeroTrust"] # Example: ["#ThrowbackThursday", "#Tech"] (will be "(#hashtag1 #hashtag2)")
+                                 # Or a single string: "#hashtag1 #hashtag2" (will be wrapped in parentheses if not already)
+search_from_user = ""         # Example: "elonmusk" (without @)
+search_filter_links = True    # Example: True to add 'filter:links', False to omit
+search_exclude_replies = False # Example: True to add '-filter:replies', False to omit
+search_until_date = "2025-05-17"  # YYYY-MM-DD
+search_since_date = "2025-01-01"  # YYYY-MM-DD
+
+# --- Constructing _filter ---
+filter_parts = []
+if search_all_these_words:
+    filter_parts.append(search_all_these_words)
+if search_exact_phrase:
+    filter_parts.append(f'"{search_exact_phrase}"') # Twitter needs exact phrases in quotes
+if search_any_of_these_keywords:
+    # Twitter syntax for "any of these" is typically (word1 OR word2) or just (word1 word2)
+    filter_parts.append(f"({search_any_of_these_keywords})")
+if search_none_of_these_words:
+    # Each word should be prefixed with a hyphen
+    excluded_words = [f"-{word.strip()}" for word in search_none_of_these_words.split() if word.strip()]
+    if excluded_words:
+        filter_parts.append(" ".join(excluded_words))
+if search_hashtags:
+    if isinstance(search_hashtags, list):
+        # Ensure hashtags start with # and form a group like (#hash1 #hash2)
+        valid_hashtags = [h.strip() for h in search_hashtags if h.strip().startswith("#")]
+        if valid_hashtags:
+            filter_parts.append(f"({' '.join(valid_hashtags)})")
+    elif isinstance(search_hashtags, str) and search_hashtags.strip():
+        # If it's a string like "#tag1 #tag2", wrap it if not already
+        cleaned_hashtags = search_hashtags.strip()
+        if cleaned_hashtags.startswith("(") and cleaned_hashtags.endswith(")"):
+            filter_parts.append(cleaned_hashtags)
+        else:
+            filter_parts.append(f"({cleaned_hashtags})")
+
+if search_from_user:
+    filter_parts.append(f"(from:{search_from_user.replace('@', '')})") # Remove @ if user included it
+if search_filter_links:
+    filter_parts.append("filter:links")
+if search_exclude_replies:
+    filter_parts.append("-filter:replies")
+if search_until_date:
+    filter_parts.append(f"until:{search_until_date}")
+if search_since_date:
+    filter_parts.append(f"since:{search_since_date}")
+
+_filter = " ".join(filter_parts)
+# Ensure _filter does not start/end with spaces that might mess up `tag + _filter` logic later
+_filter = _filter.strip()
+# -----------------advanced Setting End-------------------------
+
 
 down_count = 10000
 
-media_latest = False
+media_latest = True
 # media_latest为True时，对应 [最新] 标签页，False对应 [媒体] 标签页 (与文本模式无关)
 # 开启时建议 _filter 设置为 _filter = 'filter:links -filter:replies'
-
 
 text_down = False
 # 文本下载模式，会消耗大量API次数
 # 开启文本下载时 不要包含 filter:links
 
 #最大并发数量，遇到多次下载失败时适当降低
-max_concurrent_requests = 4 
+max_concurrent_requests = 2
 
 if text_down:
     entries_count = 20
