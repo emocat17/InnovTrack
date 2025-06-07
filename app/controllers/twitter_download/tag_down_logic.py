@@ -17,7 +17,7 @@ from .transaction_generate import get_url_path, get_transaction_id
 
 # --- Global variables that will be set by initiate_download ---
 # These are placeholders and will be overridden by parameters
-_cookie = 'auth_token=79dbe246d6b57f9b5f28678447b09578b710ed2e; ct0=635cb6aa3b218d798dd2f9c5907d157b925ac12d1a0168e3dcd1e2904893cc08e6e268cee84839bba482dfad91d4675707e3ac2078b2cfd5c45a164b9ef238418db736481d1c54a58d794f7a1ac0fadb;'
+_cookie = 'auth_token=fc0a85682d6938e677e86f0caf5e28fe9e773a03; ct0=99ec8f082562d795ab589970ce1989a66a6bae200a6e63f5f9992c38fd297d52f52eb5c3562f75ea45caa3d3cef75fedd94939c10cf117878a53c2636918b79d3c3468821211156c56317f526c77ceab;'
 _tag_param = ''
 _search_all_these_words_param = ""
 _search_exact_phrase_param = ""
